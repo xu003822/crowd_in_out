@@ -2,7 +2,7 @@
 {% load otree static %}
 
 {% block title %}
-    Results
+    结果
 {% endblock %}
 
 {% block content %}
@@ -35,9 +35,9 @@
     你捕捞了<b>{{player.extraction}}</b>条。<br>
 你们组一共捕了<b>{{ group.tot_extraction }}</b>条。<br>
 此轮最后，每个组员另外得到了<b>{{ group.individual_share }}</b>条。<br>
-    <span style="color:rgb(255,0,0);">此轮虽然你受到管制，但并没有被抽查到。所以你此轮的总得分为<b>{{ player.payoff }}</b>。
+    <span style="color:rgb(255,0,0);">此轮你被抽中，你需要支付<b>{{player.individual_fine}}</b>分惩罚。所以你此轮的总得分为<b>{{ player.payoff }}</b>。
         </span>
-    </p>
+ </p>
     </div>
 </div>
 

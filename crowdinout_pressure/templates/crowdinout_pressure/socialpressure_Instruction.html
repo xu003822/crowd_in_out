@@ -2,18 +2,19 @@
 {% load otree static %}
 
 {% block title %}
-    Random Audit
+    随机抽查
 {% endblock %}
 
 
 {% block content %}
+<div class="card bg-light m-3">
+    <div class="card-body">
 <p>
-    As of now, you might realize that if everybody catches 20 fish, your group's aggregate (and average) earnings would be maximized.
-    By catching over 20 fish, the fish will be caught too fast (the fish population in the lake will not be sustainable).
-    Until further notice,  one player of each group will be randomly chosen to be audited each round.
-    This player’s extraction will be shown to every member of the group.
-
-</p>
+    到现在你可能明白如果每个人捕捞{{quota}}条鱼，你们组的总收入和平均收入将会最大。当捕捞超过{{quota}}条，鱼将会被捕捞得太快了（湖里的鱼将不可持续）。
+    <b>从现在起，每一轮中每组将有一个组员会被随机抽中检查。这个组员的捕捞量将会对其他组员公开。</b> 此次实验还剩下13轮，请耐心继续完成实验。
+   </p>
+    </div>
+</div>
 
 {% next_button %}
 

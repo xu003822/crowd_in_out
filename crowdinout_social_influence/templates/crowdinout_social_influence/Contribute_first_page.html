@@ -2,21 +2,24 @@
 {% load otree static %}
 
 {% block title %}
-   Contribution Round_{{round_nm}}
+   正式实验—第 {{round_nm}}轮
 {% endblock %}
 
 {% block content %}
-<p>
-    Your group of
-    {{ Constants.players_per_group }} players share a fishery resource of 200 fish. In this round, each group member decides how many fish
-    between 0 and 40 to catch. At the end of the round, the number of fish doubles, up to the lake's
-    capacity of 200 fish and is divided equally among the group members. Please enter the number of fish you would like to catch in this round. The image below might help you understand your group's situation.
-</p>
+
+
+
+    <p>
+    你们组{{ Constants.players_per_group }}人共享一个200条鱼的渔业资源。此轮中每个组员决定捕捞多少条鱼（介于0到{{max_fishh}} ）。
+    此轮最后，湖里剩余鱼的数量翻一翻，直到湖的总容量200条，这些鱼将在每个组员间平均分配。
+    请在下面空格里填写你此轮打算捕捞的鱼的数量。下面的图画可能帮助你更好地理解你们组的情形。
+ </p>
 
 {% load static %} <img src="{% static "fish.PNG" %}" alt="Hi!" style="width: 80%;height: 80%;"/>
-<!--note that heroku is case sensitive, the image name must be exactly the same as the one you stored here-->
 
-{% formfields %}
+{% formfield player.extraction %}
+
+{% formfield player.other_extra %}
 
 {% next_button %}
 

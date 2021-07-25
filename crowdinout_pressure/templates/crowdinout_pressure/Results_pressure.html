@@ -24,19 +24,20 @@
   {% endfor %}
 </table>
 -->
+<div class="card bg-light m-3">
+    <div class="card-body">
 <p>
-    Your extraction is <b>{{player.extraction}}</b>.<br>
-    Your group contributed <b>{{ group.tot_extraction }}</b>.<br>
-    At the end of this round, each individual gets an extra fish catch of <b>{{ group.individual_share }}</b>.<br>
-    Your profit is therefore <b>{{ player.payoff }}</b>.
+ 你捕捞了<b>{{player.extraction}}</b>条。<br>
+你们组一共捕了<b>{{ group.tot_extraction }}</b>条。<br>
+此轮最后，每个组员另外得到了<b>{{ group.individual_share }}</b>条。<br>
+你此轮一共得到<b>{{ player.payoff }}</b>。
 </p>
 
-
 <p>
-    In this round, the group member with a member ID  <b style="color:rgb(255,0,0);"> {{group.audit_id}} </b> is audited, and his/her extraction is:
-    <b style="color:rgb(255,0,0);"> {{group.auditplayer_extrac}} </b>.
-
-</p>
+    此轮，ＩＤ 为<b style="color:rgb(255,0,0);"> {{group.audit_id}} </b>的组员被抽中，他／她的捕捞量为<b style="color:rgb(255,0,0);"> {{group.auditplayer_extrac}} </b>.　　
+    </p>
+    </div>
+</div>
 
 
 {% next_button %}

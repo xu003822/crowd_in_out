@@ -2,38 +2,33 @@
 {% load otree static %}
 
 {% block title %}
-    INTRODUCTION - PLEASE READ CAREFULLY
+    介绍( 请仔细阅读)
 {% endblock %}
 
 {% block content %}
     <p>
-        Welcome! We want to thank you all for accepting this invitation and participating in this exercise.
-The objective of this exercise is to understand how people make decisions related to the use of a shared natural resource.
+        非常感谢你接受邀请参与实验。这次实验的目的是理解人们如何对共有自然资源的使用作出决策。非常感谢你接受邀请参与实验。这次实验的目的是理解人们如何对共有自然资源的使用作出决策。
     </p>
     <p>
-        A record of your participation in this research study will be maintained, but this record will be kept strictly
-        confidential. Further, no one (including the experimenters) will be able to associate your responses in today’s
-        study with you personally. Responses will only be attributable to your unique ID.
+        你参与这次实验的纪录将被保存，但我们会对这些纪录严格保密。没有人（包括实验人员）能够将你在实验中的回答和你个人联系起来。你的回答将和分配给你的独特ID代码联系起来。
     </p>
     <p>
-        Your participation in this study will take approximately 30 minutes.
+        这次实验大约持续40分钟。
     </p>
     <p>
-        Your participation in this study is voluntary. You do not have to answer any question that you do not want to answer for any reason.
-        However, if you withdraw from the study before you have reached the end, you will not receive payment. If you have any questions or concerns
-        about the project, you may contact the researcher, Botao Qin, at 801-422-1969 or bqin@xjtu.edu.cn.
+        你的参与完全是自愿的。你不需要回答任何你不愿意回答的问题，并且不需要给出理由。但是，如果在实验结束之前你退出实验，你将得不到任何报酬。如果你对实验有任何问题或者顾虑，请和研究人员秦波涛联系。电话82665022或邮件bqinecon@xjtu.edu.cn。
     </p>
     <!--<p>
         If you have questions about your rights as a study participant, or are dissatisfied at any time with any aspect
         of this study, you may contact (anonymously, if you wish) the Institutional Review Board by phone at (801) 422-3851 or email at irb@byu.edu..
     </p>-->
     <p>
-        Continuing on with the study implies your consent to participate. If you agree to participate, please click the “Agree” button below to continue.
+        继续这个研究意味着你同意参与。如果你同意参与，请点击“同意”按钮以继续。
     </p>
 
     <div>
-        <button name="consent" value='True' class="btn btn-primary btn-large">Agree</button>
-        <button name="consent" value='False' class="btn btn-primary btn-large">Disagree</button>
+        <button name="consent" value='True' class="btn btn-primary btn-large">同意</button>
+        <button name="consent" value='False' class="btn btn-primary btn-large">不同意</button>
     </div>
 
     {{ form.consent.errors }}

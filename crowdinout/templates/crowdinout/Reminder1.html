@@ -2,22 +2,18 @@
 {% load otree static %}
 
 {% block title %}
-    测验
+
 {% endblock %}
 
 
 {% block content %}
 <div class="card bg-light m-3">
     <div class="card-body">
-<p>
-  请回答下面的问题来确保你理解了实验说明。
+<p>此次实验已过6轮还剩下13轮，请耐心继续完成实验。
+
 </p>
     </div>
 </div>
-
-{% formfield player.quiz3_all %}
-
-{% formfield player.quiz4_all %}
 
 {% next_button %}
 

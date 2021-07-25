@@ -32,11 +32,12 @@
 <div class="card bg-light m-3">
     <div class="card-body">
 <p>
-    Your catch is <b>{{player.extraction}}</b>.<br>
-    Your group's total catch is <b>{{ group.tot_extraction }}</b>.<br>
-    At the end of this round, each individual gets an extra fish catch of <b>{{ group.individual_share }}</b>.<br>
-   In this round, you are not getting audited. So your profit in this round is therefore <b>{{ player.payoff }}</b>.
-</p>
+    你捕捞了<b>{{player.extraction}}</b>条。<br>
+你们组一共捕了<b>{{ group.tot_extraction }}</b>条。<br>
+此轮最后，每个组员另外得到了<b>{{ group.individual_share }}</b>条。<br>
+    <span style="color:rgb(255,0,0);">此轮你没有被抽中，所以你此轮的总得分为<b>{{ player.payoff }}</b>。
+        </span>
+ </p>
     </div>
 </div>
 

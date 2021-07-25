@@ -2,25 +2,44 @@
 {% load otree static %}
 
 {% block title %}
-    Instruction
+    实验概览
 {% endblock %}
 
 
 {% block content %}
-<p>
-Before we begin,  we want to thank you all for accepting this invitation and participatingin this exercise.
-The objective of this exercise is to understand how people make decisionsrelated to the use of a shared natural resource.
-All the decisions you make, as well as all the other information you will provide us, will remain confidential.Welcome.
-This  experiment  allows  you  to  earn  money.   Following  the  instructions  and making rational decisions will allow you to earn the maximum possible amount.
-The money you earn will be paid in cash at the end of the experiment.This  exercise  attempts  to  create  a  situation  where  a  group  of  individuals
-must  make decisions on how to use a shared resource — e.g., a forest, a water source, or a fishery.  In the case of Xi’an, an example would be the use of ().
-You have been selected to participate ina group of five people among those signed up for playing.
-You will play for several rounds.At the end of the game, you will be able to earn cash.
-The cash prizes will depend on the quantity of tokens that you accumulate over the rounds. At the beginning of each round, your group consists of five people will share a fishery of200 fish.
-In each round, each one of the group members must decide how many fish between0 and 40 you decide to catch.  This means you can catch 0, or 1, or 2, .., or 40 fish.  Each fishcaught equals 1 token.
-These decisions will be made at the same time and no communicationis allowed.
-At the end of the round, the number of fish doubles, up to the lake’s capacity of200 fish and is divided equally among the group members.
+<!--<p>
+Before we begin,  we want to thank you all for accepting this invitation and participating in this exercise.
+The objective of this exercise is to understand how people make decisions related to the use of a shared natural resource.
+    All the decisions you make, as well as all the other information you will provide us, will remain confidential.</p>-->
+
+<div class="card bg-light m-3">
+    <div class="card-body">
+<p>欢迎参加！这个实验模拟一组人对<b>共有资源如森林、水、或渔业等</b>必须作出使用决策的情形。在报名参与的人员中，你被选中参加一个由{{Constants.players_per_group}}人组成的小组。实验结束后，你将会得到现金。
 </p>
+
+   <b>游戏描述:</b><br>
+        <p>
+        这个活动一共有19轮。现在请想象你们自己为渔夫。 在每一轮的开始，你们组的{{Constants.players_per_group}}个人将分享有200条鱼的渔业资源。每一轮中每个组员必须决定捕捞的数量，从0到{{max_fishh}}，
+        即你可以捕捞0， 或1，或2，… 或{{max_fishh}}条。这些决定必须同时作出并且不能交流。每一轮的最后，湖里剩下的鱼将会翻一倍，直到湖的总容量200条。
+        这些鱼将会在每个组员间平均分配。你所捕的每条鱼将得到1 分。
+ </p>
+
+      <b>报酬规则:</b> <br>
+<p> 最后的报酬将取决于这19轮<b>积累</b>的分数.</p>
+     <p> 28.5分=1元 </p>
+<p> 另外你将获得参与费10元 </p>
+
+<p> <b>例子：</b><br>
+    假设在某一轮你决定捕捞10条鱼，其他的组员一共捕捞了40条。结果湖里将剩下150条鱼。
+    此轮的最后，湖里的鱼将翻一翻，直到湖的容量200条。这200条鱼将平均分配给每个组员。
+    因而每个组员将另外得到40条鱼。因此，此轮中你最后一共有10+40=50条鱼。此轮你得到50分。
+</p>
+    </div>
+</div>
+
+<p>如果你仍然不清楚，请举手，实验人员将单独给你解释。 </p>
+
+{% formfield player.id_number %}
 
 {% next_button %}
 

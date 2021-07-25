@@ -2,19 +2,22 @@
 {% load otree static %}
 
 {% block title %}
-    Regulation Imposed
+    施加管制
 {% endblock %}
 
 
 {% block content %}
-<p>
-    As of now, you might realize that if everybody catches 20 fish, your group's aggregate earnings would be maximized, so is the average group earnings.
-    By catching over 20 fish, the fish will be caught too fast.
-    Therefore, at  the  beginning  of  this   round,  a regulation of maximum 20 fish may be imposed on you. Due to limited enforcement budget,
-    each round only one member of each group will be imposed a regulation and there is a 10% chance that this member will be audited and pay a
-    fine of 30 points for each unit of extra catch over the 20 fish.
-
+<div class="card bg-light m-3">
+    <div class="card-body">
+        <p>到现在你可能明白如果每个人捕捞{{quota}}条鱼，你们组的总收入和平均收入将会最大。当捕捞超过{{quota}}条，鱼将会被捕捞得太快了（湖里的鱼将不可持续）。
+        <b>从此轮开始，我们将实施一个最多捕捞{{quota}}条鱼的管制。由于执行预算的限制，每轮只有<b style="color:rgb(255,0,0);">一</b>个组员会被实施管制，并有{{Constants.prob_detect}}％
+                的机率会被抽中检查。
+        如果被检查到，则超过{{quota}}条后的每一条鱼需要支付{{Constants.fine}} 分的罚款</b>。 此次实验还剩下13轮，请耐心继续完成实验。
 </p>
+
+
+    </div>
+</div>
 
 {% next_button %}
 

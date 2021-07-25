@@ -2,16 +2,21 @@
 {% load otree static %}
 
 {% block title %}
-    Quiz
+   测验
 {% endblock %}
 
 
 {% block content %}
+<div class="card bg-light m-3">
+    <div class="card-body">
 <p>
-    Before you begin, please answer the following questions to ensure that you understand the instructions.
-    You will not be able to proceed until you have answered each question correctly.
-    Check the correct answer.
+    开始之前，请回答下面的问题来确保你理解了实验说明。之前说过，你们组一共有{{Constants.players_per_group}} 个人共享200条鱼。每一轮中每个组员可以捕捞0到{{max_fishh}}条鱼，
+    即你可以捕捞0，1，2，… 或{{max_fishh}}条。捕捞的每条鱼等于1分。此轮最后，湖里剩下的鱼的数量将翻一翻，直到湖的总容量200条。这些鱼将会在每个组员间平均分配。
+    请回答下面的问题。
+
 </p>
+    </div>
+</div>
 
 {% formfield player.quiz1_all %}
 

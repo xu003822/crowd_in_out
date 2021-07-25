@@ -19,13 +19,15 @@ Your app description
 
 class Constants(BaseConstants):
     name_in_url = 'crowdinout_pressure'
-    players_per_group = 2
-    num_rounds = 9
+    players_per_group = 5
     multiplier = 2
-    fine = 10
-    conversion = 0.1
+    fine = 0
+    conversion = 0.035
     prac_rounds = 2
-
+    prob_detect = 10
+    rounds_interval = 6
+    num_rounds = 3 * rounds_interval + 3
+    fish_quota = 100 / players_per_group
 
 class Subsession(BaseSubsession):
       pass
@@ -48,9 +50,9 @@ class Group(BaseGroup):
         extractions = [p.extraction for p in players]
         self.tot_extraction = sum(extractions)
         if (200 - self.tot_extraction) * Constants.multiplier < 200:
-            self.individual_share = (200 - self.tot_extraction) * Constants.multiplier / Constants.players_per_group
+            self.individual_share = round((200 - self.tot_extraction) * Constants.multiplier / Constants.players_per_group)
         else:
-            self.individual_share = 200 / Constants.players_per_group
+            self.individual_share = round(200 / Constants.players_per_group)
 
         for p in players:
             p.payoff = p.extraction + self.individual_share
@@ -59,12 +61,13 @@ class Group(BaseGroup):
             if self.round_number > 2:
                 p.acc_payoff = p.participant.payoff - p.in_round(1).payoff - p.in_round(
                     2).payoff  # participant.payoff is the historical payoff
+                p.participant.vars['acc_payoff'] = p.acc_payoff
                 p.act_payoff = p.acc_payoff * Constants.conversion
                 p.actpar_payoff = p.act_payoff + self.session.config['participation_fee']
 
         # randomly audit a player
-        if self.round_number in [Constants.num_rounds - 4, Constants.num_rounds - 3]:
-            self.audit = random.randint(1, 2)
+        if self.round_number in range(Constants.num_rounds - 2*Constants.rounds_interval, Constants.num_rounds - Constants.rounds_interval):
+            self.audit = random.randint(1, Constants.players_per_group)
             playeraudit = self.get_player_by_id(self.audit)
             self.auditplayer_extrac = playeraudit.extraction
             self.audit_id = playeraudit.participant.vars['idnumber']
@@ -87,71 +90,100 @@ def quiz2_question(label):
 
 def quiz3_question(label):
     return models.IntegerField(
-        choices = [40, 60, 76, 120],
-        widget = widgets.RadioSelect,
-        label = label
+        choices=[40, 58, 76, 120],
+        widget=widgets.RadioSelect,
+        label=label
     )
+
 
 def quiz4_question(label):
     return models.IntegerField(
-        choices = [60, 76, 96, 120],
-        widget = widgets.RadioSelect,
-        label = label
+        choices=[30, 48, 96, 120],
+        widget=widgets.RadioSelect,
+        label=label
     )
 
 class Player(BasePlayer):
-    id_number = models.IntegerField(label="Please enter your ID number here", min=0, max=40)
+    id_number = models.IntegerField(label="请填入你的ID 号 (在你桌子的右上角)", min=0, max=300)
     acc_payoff = models.CurrencyField(label="The player's accumulative payoff is ")
     act_payoff = models.CurrencyField(label="The player's accumulative payoff in canadian dollar is")
     actpar_payoff = models.CurrencyField(label="The player's final payoff including the participation fee is")
-    extraction = models.IntegerField(label="how many fish you decide to catch in this round", min=0, max=40)
-    age = models.IntegerField(label="What's your age?")
-    gender = models.StringField(label="What's your gender?",
-                                choices=["Male", "Female", "other", "Prefer not to say"]
+    extraction = models.IntegerField(label="你这轮决定捕捞多少条鱼", min=0, max=40)
+    other_extra = models.IntegerField(label="请同时填写你预期其他组员这一轮的平均捕鱼量", min=0, max=40)
+    individual_fine = models.IntegerField(label="The audited indiviudal's fine is ")
+    audit_or_not = models.BooleanField(label="The individual is audited or not")
+    age = models.IntegerField(label="你的年龄？")
+    gender = models.StringField(label="你的性别？",
+                                choices=["男", "女", "其他", "不愿透露"]
                                 )
-
-    income = models.FloatField(label="What's your family income per year?")
-    party = models.StringField(label="Are you a member of the Chinese Community Party?",
-                               choices=["Yes", "No", "Prefer not to say"]
-                               )
-    strategy = models.StringField(
-        label="Did you change your contribution after the random audit is imposed? If yes, why? If no, why not?",
-        )
-    strategy_repeal = models.StringField(
-        label="Did you change your contribution after the random audit is repealed? If yes, why? If no, why not?",
+    major = models.StringField(
+        label="你的专业?"
     )
+    income = models.FloatField(label="你的家庭平均月收入是？")
+    party = models.StringField(label="你是否是党员？",
+                               choices=["是", "否", "不愿透露"]
+                               )
+
+    volunteer = models.FloatField(label="你去年一年参加的志愿服务活动小时数？")
+
+    strategy = models.StringField(label="当在实施随机抽查并且公开捕捞量后，你是否改变了捕捞量？如果改变了，为什么?  如果没有改变，为什么没有改变？",
+                                  )
+    strategy_repeal = models.StringField(
+        label="当这种随机抽查废除后，与有随机抽查的时候比你是否改变了捕捞量？如果改变了，为什么?  如果没有改变，为什么没有改变？"
+    )
+
     consent = models.BooleanField()  # Record participant's consent.
+    # rand_choice = models.IntegerField(label="The decision that is randomly picked by the experimenter")
+    # condi_choice = models.IntegerField(
+    #     label="what's the contribution for the decision randomly chosen in the last round")
+    # other_choice = models.IntegerField(
+    #     label="what's others' average contribution in the last round")
     # Quiz QUESTIONS
     # Question 1
+    q1 = models.IntegerField(label="", min=0, max=40)
+    q2 = models.IntegerField(label="", min=0, max=40)
+    q3 = models.IntegerField(
+        label="", min=0, max=40)
+    q4 = models.IntegerField(
+        label="", min=0, max=40)
+    q5 = models.IntegerField(
+        label="", min=0, max=40)
+    q6 = models.IntegerField(
+        label="", min=0, max=40)
+    q7 = models.IntegerField(
+        label="", min=0, max=40)
+    q8 = models.IntegerField(
+        label="", min=0, max=40)
+    q9 = models.IntegerField(
+        label="", min=0, max=40)
 
-    quiz1_all = quiz1_question(
-        "1. Suppose you extract 20 fish this round and your group mates altogether extract 120 fish. How many fish you will get for this round?")
-    quiz2_all = quiz2_question(
-        "2. Suppose you extract 40 fish this round and your group mates altogether extract 80 fish. How many fish you will get for this round?")
+    quiz1_all = quiz1_question("1. 假设你此轮捕捞了20条鱼，其他组员一共捕捞了120条。此轮中你一共会获得多少条鱼")
+    quiz2_all = quiz2_question("2. 假设你此轮捕捞了40条鱼，其他组员一共捕捞了80条。此轮中你一共会获得多少条鱼")
 
-    # def set_payoff(self):
-    # self.paid = (self.payoff * Constants.conversion)
+    quiz3_all = quiz3_question(
+        "1.  假设你此轮捕捞了30条鱼，其他组员一共捕捞了100条。此轮中你一共会获得多少条鱼")
+    quiz4_all = quiz4_question(
+        "2.  假设你此轮捕捞了10条鱼，其他组员一共捕捞了140条。此轮中你一共会获得多少条鱼")
 
     def quiz1_all_error_message(self, quiz1_all):
         if quiz1_all != 44:
-            return 'Your answer for this quesiton is incorrect. The correct answer is 44. The reason being that since the whole group catches 140 fish, there will be 60 fish left. At' \
-                   ' the end of the round, the fish amount doubles to 120. So each player gets an extra 24 fish at the end of the round. So you will in total get 44 fish.' \
-                   ' If you are still unclear, please ask the instructor on how to answer this question.'
+            self.participant.vars['quiz'] = 0
+            return '你的答案不对。正确答案是44。这是因为小组一共捕捞了140条鱼，湖里剩下60条。此轮最后湖里的鱼数量翻一翻为120条。' \
+                   '因此每个组员另外得到24条。你一共得到44条鱼。如果你仍然不明白。请举手向实验人员询问如何解答。我们现在再试两道测试题。现在请选择44，然后继续。'
 
     def quiz2_all_error_message(self, quiz2_all):
         if quiz2_all != 72:
-            return 'Your answer for this question is incorrect. The correct answer is 72. The reason being that since the whole group catches 120 fish, there will be 80 fish left. At' \
-                   ' the end of the round, the fish amount doubles to 160. So each player gets an extra 32 fish at the end of the round. So you will in total get 72 fish.' \
-                   ' If you are still unclear, please ask the instructor on how to answer this question.'
+            self.participant.vars['quiz'] = 0
+            return '你的答案不对。正确答案是72。这是因为小组一共捕捞了120条鱼，湖里剩下80条。此轮最后湖里的鱼数量翻一翻为160条。' \
+                   '因此每个组员另外得到32条。你一共得到72条鱼。如果你仍然不明白。请举手向实验人员询问如何解答。我们现在再试两道测试题。现在请选择72，然后继续。'
 
     def quiz3_all_error_message(self, quiz3_all):
-        if quiz3_all != 76:
-            return 'Your answer for this quesiton is incorrect. The correct answer is 76. The reason being that since the whole group catches 160 fish, there will be 40 fish left. At' \
-                    ' the end of the round, the fish amount doubles to 80. So each player gets an extra 16 fish at the end of the round. So you will in total get 76 fish.' \
-                    ' If you are still unclear, please ask the instructor on how to answer this question.'
+        if quiz3_all != 58:
+            return '你的答案不对。正确答案是58。这是因为小组一共捕捞了130条鱼，湖里剩下70条。此轮最后湖里的鱼数量翻一翻为140条。' \
+                   '因此每个组员另外得到28条。你一共得到58条鱼。如果你仍然不明白。请举手向实验人员询问如何解答。现在请选择76，然后继续。'
 
     def quiz4_all_error_message(self, quiz4_all):
-        if quiz4_all != 96:
-            return 'Your answer for this question is incorrect. The correct answer is 96. The reason being that since the whole group catches 160 fish, there will be 40 fish left. At' \
-                    ' the end of the round, the fish amount doubles to 80. So each player gets an extra 16 fish at the end of the round. So you will in total get 96 fish.' \
-                    ' If you are still unclear, please ask the instructor on how to answer this question.'
+        if quiz4_all != 30:
+            return '你的答案不对。正确答案是30。这是因为小组一共捕捞了150条鱼，湖里剩下50条。此轮最后湖里的鱼数量翻一翻为100条。' \
+                   '因此每个组员另外得到20条。你一共得到30条鱼。如果你仍然不明白。请举手向实验人员询问如何解答。现在请选择96，然后继续。'
+

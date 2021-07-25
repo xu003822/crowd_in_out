@@ -2,13 +2,35 @@
 {% load otree static %}
 
 {% block title %}
-    Questionaire
+  问卷
 {% endblock %}
 
 
 {% block content %}
+现在游戏已经结束了。希望你认真完成下面的问卷:
+<br>
 
-{% formfields %}
+问题 1
+{% formfield player.age %}
 
+问题 2
+{% formfield player.gender %}
+
+问题 3
+{% formfield player.major %}
+
+问题 4
+{% formfield player.income %}
+
+问题 5
+{% formfield player.party %}
+
+问题 6
+{% formfield player.volunteer %}
+
+
+
+
+{% next_button %}
 
 {% endblock %}

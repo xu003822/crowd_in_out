@@ -2,7 +2,7 @@
 {% load otree static %}
 
 {% block title %}
-    OVERVIEW OF THE EXPERIMENT
+    实验概览
 {% endblock %}
 
 
@@ -14,35 +14,30 @@ The objective of this exercise is to understand how people make decisions relate
 
 <div class="card bg-light m-3">
     <div class="card-body">
-<p>Welcome.
-    This exercise simulates a situation where a group of individuals must make decisions on how to use a shared
-    resource --- e.g., a forest, a water source, or a fishery.
-    You have been selected to participate in a group of five volunteers among those signed up for playing.
-    At the end of the game, you will be able to earn cash.
+<p>欢迎参加！这个实验模拟一组人对共有资源如森林、水、或渔业等必须作出使用决策的情形。在报名参与的人员中，你被选中参加一个由{{Constants.players_per_group}}人组成的小组。实验结束后，你将会得到现金。
 </p>
 
-   <b>Game Description:</b><br>
-This activity has 19 rounds. At the beginning of each round, your group shares a fishery of 200 fish.
-    In each round, each group member must decide how many fish
-    between 0 and 40 (inclusive) to catch. This means you can catch 0, or 1, or 2, .., or 40 fish. These decisions
-    will be made at the same time and no communication is allowed.  At the end of the round, the number of fish doubles, up to the lake's
-    capacity of 200 fish, and those fish are divided equally among the group members. For each fish caught you will receive 1 point. </p>
+   <b>游戏描述:</b><br>
+        <p>
+        这个活动一共有19轮。在每一轮的开始，你们组的{{Constants.players_per_group}}个人将分享有200条鱼的渔业资源。每一轮中每个组员必须决定捕捞的数量，从0到{{max_fishh}}，
+        即你可以捕捞0， 或1，或2，… 或{{max_fishh}}条。这些决定必须同时作出并且不能交流。每一轮的最后，湖里剩下的鱼将会翻一倍，直到湖的总容量200条。
+        这些鱼将会在每个组员间平均分配。你所捕的每条鱼将得到1 分。
+ </p>
 
-      <b>Payment rule:</b> <br>
-<p> Final payment will depend on the quantity of points that you <b>accumulate</b> over the rounds.</p>
-     <p> 1 dollar is worth 40 points</p>
+      <b>报酬规则:</b> <br>
+<p> 最后的报酬将取决于这19轮<b>积累</b>的分数.</p>
+     <p> 28.5分=1元 </p>
 
 
-<p> <b>Example:</b><br>
-    Imagine that in a given round you  decide  to  catch  10  fish  and  other  group members catch a total of 40 fish.
-    This results in 150 fish left in the lake.
-    At the end of the round, the amount of fish doubles, up to the lake’s capacity of 200 fish. The 200 fish will be evenly distributed to the group members.
-    Thus each group member will get 40 more fish at the end of the round.
-    Therefore,  your total amount of fish in this round would be 10 + 40 = 50.</p>
+<p> <b>例子：</b><br>
+    假设在某一轮你决定捕捞10条鱼，其他的组员一共捕捞了40条。结果湖里将剩下150条鱼。
+    此轮的最后，湖里的鱼将翻一翻，直到湖的容量200条。这200条鱼将平均分配给每个组员。
+    因而每个组员将另外得到40条鱼。因此，此轮中你最后一共有10+40=50条鱼。
+</p>
     </div>
 </div>
 
-<p>Still unclear? Please raise your hand and the experimenter will personally explain to you. </p>
+<p>如果你仍然不清楚，请举手，实验人员将单独给你解释。 </p>
 
 {% formfield player.id_number %}
 

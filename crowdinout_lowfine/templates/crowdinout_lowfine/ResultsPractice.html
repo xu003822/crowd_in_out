@@ -27,16 +27,16 @@
 <div class="card bg-light m-3">
     <div class="card-body">
 <p>
-    Your catch is <b>{{player.extraction}}</b>.<br>
-    Your group's total catch is <b>{{ group.tot_extraction }}</b>.<br>
-    At the end of this round, each individual gets an extra fish catch of <b>{{ group.individual_share }}</b>.<br>
-    Your profit is therefore <b>{{ player.payoff }}</b>.
+ 你捕捞了<b>{{player.extraction}}</b>条。<br>
+你们组一共捕了<b>{{ group.tot_extraction }}</b>条。<br>
+此轮最后，每个组员另外得到了<b>{{ group.individual_share }}</b>条。<br>
+你此轮一共得到<b>{{ player.payoff }}</b>。
 </p>
     </div>
 </div>
 
 <p>
-    Now the practice rounds are over. Click "Next" to begin the real game.
+    练习结束。请点击“下一步”开始正式的实验。
 </p>
 {% next_button %}
 

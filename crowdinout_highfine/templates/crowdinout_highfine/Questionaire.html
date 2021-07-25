@@ -2,26 +2,39 @@
 {% load otree static %}
 
 {% block title %}
-    Questionaire
+  问卷
 {% endblock %}
 
 
 {% block content %}
-Now the game is over. Please complete the following survey questions:
+现在游戏已经结束了。希望你认真完成下面的问卷:
+<br>
 
-Question 1
+问题 1
 {% formfield player.age %}
 
-Question 2
+问题 2
 {% formfield player.gender %}
 
-Question 3
+问题 3
+{% formfield player.major %}
+
+问题 4
 {% formfield player.income %}
 
-Question 3
+问题 5
 {% formfield player.party %}
 
-Click "next" to submit.
+问题 6
+{% formfield player.volunteer %}
+
+问题 7
+{% formfield player.strategy %}
+
+问题 8
+{% formfield player.strategy_repeal %}
+
+
 {% next_button %}
 
 {% endblock %}

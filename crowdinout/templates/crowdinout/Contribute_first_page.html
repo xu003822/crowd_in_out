@@ -2,17 +2,23 @@
 {% load otree static %}
 
 {% block title %}
-   Contribution
+   正式实验___第 {{round_nm}}轮
 {% endblock %}
 
 {% block content %}
-<p>
-    This is a public goods game with
-    {{ Constants.players_per_group }} players per group. Please enter the number of fish you would like to catch in this round, the number has to be an integer and between 0 and 40 (including 0 and 40)
-</p>
 
+    <p>
+    你们组{{ Constants.players_per_group }}人共享一个200条鱼的渔业资源。此轮中每个组员决定捕捞多少条鱼（介于0到{{max_fishh}})。
+    此轮最后，湖里剩余鱼的数量翻一翻，直到湖的总容量200条，这些鱼将在每个组员间平均分配。
+    请在下面空格里填写你此轮打算捕捞的鱼的数量。下面的图画可能帮助你更好地理解你们组的情形。
+ </p>
 
-{% formfields %}
+<br>
+{% load static %} <img src="{% static "fish.PNG" %}" alt="Hi!" style="width: 80%;height: 80%;"/>
+
+{% formfield player.extraction %}
+
+{% formfield player.other_extra %}
 
 {% next_button %}
 

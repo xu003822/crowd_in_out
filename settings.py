@@ -4,29 +4,36 @@ STATIC_URL = '/static/'
 
 SESSION_CONFIGS = [
     dict(
+        name='crowdinout',
+        display_name='A public goods experiment',
+        num_demo_participants=5,
+        app_sequence=['crowdinout'],
+    ),
+
+    dict(
         name='crowdinout_highfine',
         display_name='A public goods experiment with high fine',
-        num_demo_participants=4,
+        num_demo_participants=5,
         app_sequence=['crowdinout_highfine'],
     ),
 
     dict(
         name='crowdinout_lowfine',
         display_name='A public goods experiment with low fine',
-        num_demo_participants=4,
+        num_demo_participants=5,
         app_sequence=['crowdinout_lowfine'],
     ),
 
     dict(
         name='crowdinout_pressure',
         display_name='A public goods experiment with peer pressure',
-        num_demo_participants=4,
+        num_demo_participants=5,
         app_sequence=['crowdinout_pressure'],
     ),
     dict(
         name='crowdinout_social_influence',
         display_name='A public goods experiment testing social influence',
-        num_demo_participants=4,
+        num_demo_participants=5,
         app_sequence=['crowdinout_social_influence'],
     ),
 ]
@@ -37,31 +44,18 @@ SESSION_CONFIGS = [
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=0.1, participation_fee=5.00, doc=""
+    real_world_currency_per_point=0.035, participation_fee=10.00, doc=""
 )
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'zh-hans'
 
 # e.g. EUR, GBP, CNY, JPY
 REAL_WORLD_CURRENCY_CODE = 'CNY'
 USE_POINTS = True
+POINTS_CUSTOM_NAME = '分'
 
-ROOMS = [
-    dict(
-        name='Xian_Jiaotong',
-        display_name='Xian_Jiaotong_experiment',
-        participant_label_file='_rooms/econ101.txt',
-        use_secure_urls=True
-    ),
-    dict(name='live_demo', display_name='Room for live demo (no participant labels)'),
-]
-
-#if environ.get('OTREE_PRODUCTION') not in {None, '', '0'}:
-   # DEBUG = False
-#else:
-    #DEBUG = True
 
 ADMIN_USERNAME = 'admin'
 
@@ -70,6 +64,7 @@ ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 DEMO_PAGE_INTRO_HTML = """
 Here are some oTree games.
 """
+
 #environ['OTREE_PRODUCTION'] = '1'
 
 # don't share this with anybody.
